@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,10 +27,9 @@ class AdminSeeder extends Seeder
             "role" => 'editor',
             "password" => Hash::make("12345678")
         ]);
-        User::create([
+        Customer::create([
             'name' => 'customer',
             'email' => 'customer@gmail.com',
-            'role' => 'customer',
             'password' => Hash::make('12345678'),
         ]);
     }

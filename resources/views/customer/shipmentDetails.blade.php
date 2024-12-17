@@ -1,4 +1,3 @@
-</html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,28 +13,36 @@
 
     @section('content')
         <div class="container">
-            <h1 class="text-center mb-4">Your Shipments</h1>
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Tracking Number</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>123456789</td>
-                        <td>2024-12-06</td>
-                        <td>In-Transit</td>
-                    </tr>
-                    <tr>
-                        <td>987654321</td>
-                        <td>2024-12-01</td>
-                        <td>Delivered</td>
-                    </tr>
-                </tbody>
-            </table>
+            <h1 class="my-5 text-primary">Your Shipments</h1>
+            @if ($shipments && count($shipments) > 0)
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Shipment Number</th>
+                            <th>Tracking Number</th>
+                            <th>Delivery Date</th>
+                            <th>Status</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($shipments as $shipment)
+                            <tr>
+                                <td>{{ $shipment->shipment_number }}</td>
+                                <td>{{ $shipment->tracking_number }}</td>
+                                <td>{{ $shipment->delivery_date }}</td>
+                                <td>{{ $shipment->status }}</td>
+                                <td>{{ $shipment->cost }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @else
+                <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-circle me-2" aria-hidden="true"></i>
+                    <span>No shipments available at this time.</span>
+                </div>
+            @endif
         </div>
     @endsection
 

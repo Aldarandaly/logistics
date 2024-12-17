@@ -29,19 +29,28 @@
                     @method('POST')
                     <div class="mb-3">
                         <label for="name" class="form-label text-secondary fw-bold">Name</label>
-                        <input type="text" class="form-control bg-body-secondary border-0" id="name" name="name" required>
+                        <input type="text" class="form-control bg-body-secondary border-0" id="name" name="name"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label text-secondary fw-bold">Email</label>
-                        <input type="email" class="form-control bg-body-secondary border-0" id="email" name="email" required>
+                        <input type="email" class="form-control bg-body-secondary border-0" id="email" name="email"
+                            required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label text-secondary fw-bold">Password</label>
+                        <input type="password" class="form-control bg-body-secondary border-0" id="password"
+                            name="password" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label text-secondary fw-bold">Phone</label>
-                        <input type="number" class="form-control bg-body-secondary border-0" id="phone" name="phone" required>
+                        <input type="number" class="form-control bg-body-secondary border-0" id="phone" name="phone"
+                            required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label text-secondary fw-bold">Address</label>
-                        <input type="text" class="form-control bg-body-secondary border-0" id="address" name="address" required>
+                        <input type="text" class="form-control bg-body-secondary border-0" id="address" name="address"
+                            required>
                     </div>
                     <button type="submit" class="btn btn-dark fs-6 rounded-pill px-3 py-2"><i class="bi bi-plus"></i>Create
                     </button>

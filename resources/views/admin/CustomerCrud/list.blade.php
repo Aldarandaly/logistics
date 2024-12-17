@@ -37,7 +37,9 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 'editor')
+                                    <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -47,36 +49,33 @@
                                     <td class="text-secondary">{{ $customer->email }}</td>
                                     <td class="text-secondary">{{ $customer->phone }}</td>
                                     <td class="text-secondary">{{ $customer->address }}</td>
-                                    <td class="d-flex justify-content-evenly align-items-center">
-
-                                        @if (Auth::user()->role == 'admin')
+                                    @if (Auth::user()->role == 'admin')
+                                        <td class="d-flex justify-content-evenly align-items-center">
                                             <a href="{{ route('customers.show', $customer->id) }}"
                                                 class="btn btn-primary me-2">
                                                 <i class="bi bi-eye"></i>
                                             </a>
-                                        @endif
-                                        @if (Auth::user()->role == 'editor')
-                                            <div class="edit">
-                                                <!-- Edit Button -->
-                                                <a href="{{ route('customers.edit', $customer->id) }}"
-                                                    class="btn btn-warning me-2">
-                                                    <i class="bi bi-pen"></i>
-                                                </a>
-                                            </div>
+                                        </td>
+                                    @endif
+                                    @if (Auth::user()->role == 'editor')
+                                        <td class="d-flex justify-content-evenly align-items-center">
+                                            <!-- Edit Button -->
+                                            <a href="{{ route('customers.edit', $customer->id) }}"
+                                                class="btn btn-warning me-2">
+                                                <i class="bi bi-pen"></i>
+                                            </a>
 
-                                            <div class="delete">
-                                                <!-- Delete Button -->
-                                                <form action="{{ route('customers.destroy', $customer->id) }}"
-                                                    method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="bi bi-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        @endif
-                                    </td>
+                                            <!-- Delete Button -->
+                                            <form action="{{ route('customers.destroy', $customer->id) }}" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

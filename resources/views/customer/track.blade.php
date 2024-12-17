@@ -17,12 +17,14 @@
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .shipment-details {
             background-color: #fff;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
+
         .margin {
             margin-top: 6rem;
         }
@@ -55,15 +57,15 @@
                 </div>
 
                 <div class="shipment-details flex-grow-1">
+                    <h2 class="text-success">
+                        <i class="bi bi-info-circle"></i> Shipment Details:
+                    </h2>
                     @if (session('error'))
                         <div class="alert alert-danger" role="alert">
                             <i class="bi bi-exclamation-circle"></i> {{ session('error') }}
                         </div>
                     @endif
                     @if (isset($shipment))
-                        <h2 class="text-success">
-                            <i class="bi bi-info-circle"></i> Shipment Details:
-                        </h2>
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <strong>Status:</strong> {{ $shipment->status }}

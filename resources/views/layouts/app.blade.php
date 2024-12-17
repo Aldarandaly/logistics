@@ -101,6 +101,12 @@
                             </a>
                         </li>
                         <li class="nav-item mb-2">
+                            <a class="nav-link text-dark fw-bold" href="{{ route('ShowContactUs.index') }}">
+                                <i class="bi bi-person-rolodex mx-2"></i>
+                                <span>Contact Message</span>
+                            </a>
+                        </li>
+                        <li class="nav-item mb-2">
                             <a class="nav-link text-dark fw-bold" href="{{ route('activities.index') }}">
                                 <i class="bi bi-bell mx-2"></i>
                                 <span>User Activity</span>
@@ -108,7 +114,7 @@
                         </li>
                         <li class=" mb-2">
                             <div class="userInfo d-flex justify-content-around align-item-center "
-                                style="margin-top: 250px">
+                                style="margin-top: 200px">
                                 <i class="bi bi-person-circle ml-2">
                                     {{ Auth::user()->name }}
                                 </i>

@@ -33,7 +33,9 @@
                                 <th scope="col">Customer Id</th>
                                 <th scope="col">Report Type</th>
                                 <th scope="col">Details</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 'editor')
+                                    <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +44,8 @@
                                     <td class="text-secondary">{{ $report->customer_id }}</td>
                                     <td class="text-secondary">{{ $report->report_type }}</td>
                                     <td class="text-secondary">{{ $report->details }}</td>
-                                    <td class="d-flex justify-content-evenly align-items-center">
-                                        @if (Auth::user()->role == 'editor')
+                                    @if (Auth::user()->role == 'editor')
+                                        <td class="d-flex justify-content-evenly align-items-center">
                                             <div class="edit">
                                                 <!-- Edit Button -->
                                                 <a href="{{ route('reports.edit', $report->id) }}"
@@ -62,8 +64,8 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

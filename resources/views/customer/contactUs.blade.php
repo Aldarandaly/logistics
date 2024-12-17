@@ -37,24 +37,22 @@
     @section('content')
         <div class="container">
             <div class="form-container mx-auto col-md-6">
-                @if (session('success'))
-                    <div class="alert alert-success" role="alert">
-                        <i class="bi bi-exclamation-circle"></i> {{ session('success') }}
-                    </div>
-                @endif
                 <h1 class="text-center mb-4">Contact Us</h1>
-                <form>
+                <form action="{{ route('contactUs.store') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+                        <input type="text" class="form-control" id="name" name="name"
+                            placeholder="Enter your name" required>
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        <input type="email" class="form-control" id="email" name="email"
+                            placeholder="Enter your email" required>
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="4" placeholder="Write your message" required></textarea>
+                        <textarea class="form-control" id="message" rows="4" name="message" placeholder="Write your message" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
                 </form>
@@ -62,5 +60,4 @@
         </div>
     @endsection
 </body>
-
 </html>

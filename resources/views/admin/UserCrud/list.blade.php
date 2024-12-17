@@ -33,7 +33,9 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Role</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 'editor')
+                                    <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +44,8 @@
                                     <td class="text-secondary">{{ $user->name }}</td>
                                     <td class="text-secondary">{{ $user->email }}</td>
                                     <td class="text-secondary">{{ $user->role }}</td>
-                                    <td class="d-flex justify-content-evenly align-items-center">
-                                        @if (Auth::user()->role == 'editor')
+                                    @if (Auth::user()->role == 'editor')
+                                        <td class="d-flex justify-content-evenly align-items-center">
                                             <div class="edit">
                                                 <!-- Edit Button -->
                                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning me-2">
@@ -61,8 +63,8 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

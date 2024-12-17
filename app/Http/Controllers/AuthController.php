@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Events\AdminActivityEvent;
+use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
     public function index()
     {
         return view('login');
@@ -17,43 +18,39 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
-
-        Log::info('Request Token:', $request->input('_token'));
-        Log::info('Session Token:', session()->token());
-        $credentials = $request->only('email', 'password');
-
+        // Validate incoming request
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
-            'role' => 'required'
         ]);
-
-
-        if (Auth::guard('web')->attempt($credentials)) {
-
+        // Attempt to authenticate the User model (default 'web' guard)
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::guard('web')->user();
-            Log::info("User Role: " . $user->role);
-
-            if ($user->role === 'admin') {
-                event(new AdminActivityEvent('Admin has logged in successfully!'));
-            } elseif ($user->role === 'editor') {
-                event(new AdminActivityEvent('Editor has logged in successfully!'));
+            // Redirect based on user role
+            if ($user->role === 'admin' || $user->role === 'editor') {
+                event(new AdminActivityEvent("{$user->role} has logged in successfully!"));
+                return redirect()->route('dashboard');
             }
-
-
-            return redirect()->route('dashboard');
+            // Logout if role is unauthorized
+            Auth::guard('web')->logout();
             return redirect()->route('login')->withErrors(['access' => 'Access denied for your role.']);
         }
-
-
-        if (Auth::guard('customer')->attempt($credentials)) {
-            return redirect()->route('home');
+        // Attempt to authenticate the Customer model (custom 'customer' guard)
+        if (Auth::guard('customer')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            $customer = Auth::guard('customer')->user();
+            // Redirect based on Customer role
+            if ($customer->role === 'customer') {
+                return redirect()->route('home.index');
+            }
+            // Logout if role is unauthorized
+            Auth::guard('customer')->logout();
+            return redirect()->route('login')->withErrors(['access' => 'Access denied for your role.']);
         }
-
-        // Invalid credentials
-        return back()->withErrors(['login' => 'Invalid credentials.']);
+        // If login fails for both User and Customer
+        return redirect()->route('login')->withErrors(['credentials' => 'Invalid login credentials.']);
     }
+
+
 
     public function logout(Request $request)
     {

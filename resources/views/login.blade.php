@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>LogIn</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -29,8 +30,12 @@
                 </div>
                 <p>Admin Email : <span class="text-danger">admin@gmail.com</span></p>
                 <p>Editor Email : <span class="text-danger">editor@gmail.com</span></p>
+                <p> Email : <span class="text-danger">customer@gmail.com</span></P>
                 <p>Password : <span class="text-danger">12345678</span></p>
-                <button type="submit" class="btn btn-primary w-100">LogIn</button>
+                <div class="btns d-flex justify-content-between align-items-center">
+                    <button type="submit" class="btn btn-primary w-100">LogIn</button>
+                    <a href="{{ route('register') }}" type="submit" class="btn btn-primary mx-2 w-100">Register</a>
+                </div>
             </form>
         </div>
     </div>

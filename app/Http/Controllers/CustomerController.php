@@ -34,13 +34,12 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'name' => 'required|',
             'email' => 'required|email',
-            // 'password' => 'required',
-            // 'role' => 'required',
+            'password' => 'required',
             'phone' => 'required|numeric',
             'address' => 'required|string',
         ]);
 
-        // $validated['password'] = Hash::make($validated['password']);
+        $validated['password'] = Hash::make($validated['password']);
         $customers = Customer::create($validated);
 
         event(new AdminActivityEvent('Customer created successfully!'));
@@ -71,13 +70,12 @@ class CustomerController extends Controller
         $validated = $request->validate([
             'name' => 'required|',
             'email' => 'required|email',
-            // 'password' => 'required',
-            // 'role' => 'required',
+            'password' => 'required',
             'phone' => 'required|numeric',
             'address' => 'required|string',
         ]);
 
-        // $validated['password'] = Hash::make($validated['password']);
+        $validated['password'] = Hash::make($validated['password']);
 
         $customers = Customer::find($id);
         $customers->update($validated);

@@ -34,7 +34,9 @@
                                 <th scope="col">Customer Name</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Total Amount</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 'editor')
+                                    <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -44,8 +46,8 @@
                                     <td class="text-secondary">{{ $order->customer_name }}</td>
                                     <td class="text-secondary">{{ $order->status }}</td>
                                     <td class="text-secondary">{{ $order->total_amount }}</td>
-                                    <td class="d-flex justify-content-evenly align-items-center">
-                                        @if (Auth::user()->role == 'editor')
+                                    @if (Auth::user()->role == 'editor')
+                                        <td class="d-flex justify-content-evenly align-items-center">
                                             <div class="edit">
                                                 <!-- Edit Button -->
                                                 <a href="{{ route('orders.edit', $order->id) }}"
@@ -65,8 +67,8 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

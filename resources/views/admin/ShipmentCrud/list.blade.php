@@ -37,7 +37,9 @@
                                 <th scope="col">Delivery Date</th>
                                 <th scope="col">Cost</th>
                                 <th scope="col">Payment Status</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 'editor')
+                                    <th scope="col">Action</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -51,8 +53,8 @@
                                     <td class="text-secondary">{{ $shipment->cost }}</td>
                                     <td class="text-secondary">{{ $shipment->payment_status }}</td>
 
-                                    <td class="d-flex justify-content-evenly align-items-center">
-                                        @if (Auth::user()->role == 'editor')
+                                    @if (Auth::user()->role == 'editor')
+                                        <td class="d-flex justify-content-evenly align-items-center">
                                             <div class="edit">
                                                 <!-- Edit Button -->
                                                 <a href="{{ route('shipments.edit', $shipment->id) }}"
@@ -71,8 +73,8 @@
                                                     </button>
                                                 </form>
                                             </div>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
